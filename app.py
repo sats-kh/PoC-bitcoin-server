@@ -16,6 +16,7 @@ RPC_HOST = '10.0.0.176'  # Assuming local bitcoin-cli json-rpc server
 
 # Sample TxID
 # 9348f529d870dbd47c750db3cc00da0bc4825796b093afbd9ab892e9b798673b
+# 0598bda798c7d11e52bf597f725a13346708a4618138f67e6c6aad0d33bf72c2
 
 # Define a simple HTML template for displaying transaction data
 HTML_TEMPLATE = HTML_TEMPLATE = ''' 
@@ -47,7 +48,7 @@ HTML_TEMPLATE = HTML_TEMPLATE = '''
         }
         h1 {
             color: #333;
-            font-size: 24px;
+            font-size: 34px;
             text-align: center;
             margin-bottom: 20px;
         }
@@ -120,7 +121,7 @@ HTML_TEMPLATE = HTML_TEMPLATE = '''
 </head>
 <body>
     <div class="container">
-        <h1>Bitcoin Transaction Details</h1>
+        <h1>Proof-of-Creation Explorer</h1>
         <form action="/" method="POST">
             <label for="txid">Tx ID:</label>
             <input type="text" id="txid" name="txid" required>
@@ -128,8 +129,8 @@ HTML_TEMPLATE = HTML_TEMPLATE = '''
         </form>
         
         {% if poc %}
-        <h2>PoC Decoder</h2>
-        <h3>BITCOIN DATA</h3>
+        <h2>DECODER</h2>
+        <h4>BITCOIN DATA</h4>
         <ul>
             <li><strong>txID:</strong> {{ poc.txid }}</li>
             <li><strong>Address:</strong> {{ poc.address }}</li>
@@ -137,10 +138,11 @@ HTML_TEMPLATE = HTML_TEMPLATE = '''
             <li><strong>Block Height:</strong> {{ poc.blockheight }}</li>
             <li><strong>Fee (BTC):</strong> {{ poc.fee_btc }}</li>
             <li><strong>Encoding:</strong> {{ poc.encoding }}</li>
-            <li><strong>Raw Hex:</strong> {{ poc.rawhex }}</li>
-            <li><strong>Raw UTF:</strong> {{ poc.rawutf }}</li>
+            <li><strong>Raw (Hex):</strong> {{ poc.rawhex }}</li>
+            <li><strong>Raw (UTF-8):</strong> {{ poc.rawutf }}</li>
             <li><strong>IPFS address:</strong> <a href="{{ poc.ipfs }}" target="_blank">{{ poc.ipfs }}</a></li>
-            <li><strong>Mempool Explorer:</strong> <a href="{{ poc.mempool_url }}" target="_blank">{{ poc.mempool_url }}</a></li>
+            <li><strong>Command Prompt:</strong> {{ poc.cmd }}</a></li>
+            <li><strong><a href="{{ poc.mempool_url }}" >Mempool Explorer</a></strong></li>
         </ul>
         {% if poc.ipfs %}
             <img src="{{ poc.ipfs }}" alt="IPFS Image">
