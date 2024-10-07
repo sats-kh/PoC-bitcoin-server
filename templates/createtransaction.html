@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Bitcoin Transaction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 700px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        label {
+            font-size: 16px;
+            color: #555;
+        }
+        input, textarea {
+            padding: 8px;
+            font-size: 16px;
+            width: 97%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Create Bitcoin Transaction</h1>
+        <form action="/createtransaction" method="POST" enctype="multipart/form-data">
+            <label for="file">Choose an image:</label>
+            <input type="file" name="file" id="file" required>
+            
+            <label for="phrase">Enter the Command Prompt used to generate the image:</label>
+            <textarea name="phrase" id="phrase" rows="3" required></textarea>
+            
+            <button type="submit">Create Transaction</button>
+        </form>
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+        {% if txid %}
+        <h2>Transaction Created Successfully</h2>
+        <p><strong>Transaction ID:</strong> {{ txid }}</p>
+        <p><strong>CID:</strong> {{ cid }}</p>
+        <p><strong>Command Prompt:</strong> {{ phrase }}</p>
+        <p><a href="http://localhost:5001/tx/{{ txid }}" target="_blank">View in Proof-of-Createion Explorer</a></p>
+        <p><a href="https://mempool.space/tx/{{ txid }}" target="_blank">View in Mempool</a></p>
+        {% endif %}
+    </div>
+</body>
+</html>

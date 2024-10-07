@@ -33,10 +33,11 @@ def parse_dsl_and_cmd(raw_utf):
     # Check and parse DSL for IPFS data
     if 'DSL:' in decoded_str:
         ipfs_hash = decoded_str.split('DSL:')[1].split(';')[0].strip()
-        ipfs_url = f"https://ipfs.io/ipfs/{ipfs_hash}"
+        # ipfs_url = f"https://ipfs.io/ipfs/{ipfs_hash}"
+        ipfs_url = f"http://10.0.0.176:8080/ipfs/{ipfs_hash}"
     # Check and parse CMD if available
     if 'CMD:' in decoded_str:
-        cmd = decoded_str.split('CMD:')[1].strip()
+        cmd = decoded_str.split('CMD:')[1].strip().split(';')[0].strip()
 
     # If no CMD, default it to None
     return ipfs_url, cmd

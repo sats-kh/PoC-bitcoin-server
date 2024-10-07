@@ -1,5 +1,5 @@
 import decimal
-from arc4 import arc4_decrypt, init_arc4
+from utils.arc4 import arc4_decrypt, init_arc4
 
 KEY = "6005ee8cc02e528e20c8e5ff71191723b0260391020862a03587a985f813dabe"
 

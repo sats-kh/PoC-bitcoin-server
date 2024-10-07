@@ -1,12 +1,11 @@
 # How to make PubKey using ARC4
-from arc4 import init_arc4, arc4_decrypt
-import hashlib
+from utils.arc4 import init_arc4, arc4_decrypt
 
 # "https://ipfs.io/ipfs/bafybeihkoviema7g3gxyt6la7vd5ho32ictqbilu3wnlo3rs7ewhnp7lly"
 data = b"DSL: bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi; CMD: Generates a surreal image of a forest with floating orbs."
 print(len(data), "data length must be 32x")
 
-# encoding
+# encryption
 cipher = init_arc4("6005ee8cc02e528e20c8e5ff71191723b0260391020862a03587a985f813dabe")
 encryptor = cipher.encryptor()
 encrypted = encryptor.update(data) + encryptor.finalize()
@@ -22,7 +21,7 @@ for chunk in hex_chunks:
     fake_pubkeys.append(fake_pubkey)
 print(fake_pubkeys)
 
-# decoding
+# decryption
 result = ""
 for i in fake_pubkeys:
     result += i[2:]
